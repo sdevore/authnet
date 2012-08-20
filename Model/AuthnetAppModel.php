@@ -1,7 +1,8 @@
 <?php
 
     class AuthnetAppModel extends AppModel {
-
+		public $useDbConfig = 'authnet';
+		
         public $log = array();
         // false to disable
 
@@ -35,17 +36,17 @@
             }
 
             // initialize extras: transaction log model
-            if (!empty($this->config['logModel'])) {
-                if (App::import('model', $this->config['logModel'])) {
-                    $this->logModel = ClassRegistry::init(array_pop(explode('.', $this->config['logModel'])));
-                    if (isset($this->config['logModel.useTable']) && $this->config['logModel.useTable'] !== null) {
-                        $this->logModel->useTable = $this->config['logModel.useTable'];
+            if (!empty($this->config['logModel']) && $this->config['logModel']['model']) {
+                if (App::import('model', $this->config['logModel']['model'])) {
+                    $this->logModel = ClassRegistry::init(array_pop(explode('.', $this->config['logModel']['model'])));
+                    if (isset($this->config['logModel']['useTable']) && $this->config['logModel']['useTable'] !== null) {
+                        $this->logModel->useTable = $this->config['logModel']['useTable'];
                     }
                 }
             }
 
             ConnectionManager::create($this->useDbConfig, $this->config);
-            $db = &ConnectionManager::getDataSource($this->useDbConfig);
+            $ds = &ConnectionManager::getDataSource($this->useDbConfig);
             parent::__construct($id, $table, $ds);
 
         }
