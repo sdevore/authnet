@@ -6,7 +6,7 @@ class AuthnetTransactionsController extends AuthnetAppController {
 		if (!empty($this->data)) {
 			if ($result = $this->AuthnetTransaction->save($this->data)) {
 				$this->data = Set::merge($this->data, $result);
-				$this->Session->setFlash(__('Transaction approved. Transaction id: '.$this->AuthnetTransaction->id, true));
+				$this->Session->setFlash(__('Transaction approved. Transaction id: '.$this->AuthnetTransaction->id));
 				$this->data[$this->AuthnetTransaction->alias] = null;
 			} else {
 				$this->__flashDecline();
@@ -22,7 +22,7 @@ class AuthnetTransactionsController extends AuthnetAppController {
 		if (!empty($this->data)) {
 			debug($this->data);
 			if ($result = $this->AuthnetTransaction->delete($this->data[$this->AuthnetTransaction->alias][$this->AuthnetTransaction->primaryKey])) {
-				$this->Session->setFlash(__('Transaction voided.', true));
+				$this->Session->setFlash(__('Transaction voided.'));
 				debug($result);
 			} else {
 				debug($this->AuthnetTransaction->invalidFields());
@@ -40,7 +40,7 @@ class AuthnetTransactionsController extends AuthnetAppController {
 			if (!empty($invalid['declined'])) {
 				$this->Session->setFlash('<span title="Subcode: ' . $invalid['declined'][1] . '">' . $invalid['declined'][0] . '</span>: ' . $invalid['declined'][2]);
 			} else {
-				$this->Session->setFlash(__('The transaction could not be processed. Please review the errors below.', true));
+				$this->Session->setFlash(__('The transaction could not be processed. Please review the errors below.'));
 			}
 		}
 	}

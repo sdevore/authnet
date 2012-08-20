@@ -2,7 +2,7 @@
 
 App::import('Model', 'Authnet.AuthnetTransaction');
 
-Class AuthnetTransactionTestCase extends CakeTestCase {
+Class AuthnetTransactionTest extends CakeTestCase {
 
 	public $Transaction;
 	public $fixtures = array();	

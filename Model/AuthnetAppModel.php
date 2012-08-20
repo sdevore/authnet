@@ -41,10 +41,10 @@ class AuthnetAppModel extends AppModel {
 		}
 		// double-check we have required keys
 		if (empty($config['login']) || empty($config['login'])) {
-			trigger_error(__d('authnet', "Invalid AUTHNET Configuration, missing 'login' field.", true), E_USER_WARNING);
+			trigger_error(__d('authnet', "Invalid AUTHNET Configuration, missing 'login' field."), E_USER_WARNING);
 			die();
 		} elseif (empty($config['key']) || empty($config['key'])) {
-			trigger_error(__d('authnet', "Invalid AUTHNET Configuration, missing 'key' field.", true), E_USER_WARNING);
+			trigger_error(__d('authnet', "Invalid AUTHNET Configuration, missing 'key' field."), E_USER_WARNING);
 			die();
 		}
 		$this->config = $config;
