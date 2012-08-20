@@ -4,10 +4,10 @@ class AuthnetTransactionsController extends AuthnetAppController {
 	
 	public function add() {
 		if (!empty($this->data)) {
-			if ($result = $this->AuthnetTransaction->save($this->data)) {
-				$this->data = Set::merge($this->data, $result);
+			if ($result = $this->AuthnetTransaction->save($this->request->data)) {
+				$this->request->data = Set::merge($this->request->data, $result);
 				$this->Session->setFlash(__('Transaction approved. Transaction id: '.$this->AuthnetTransaction->id));
-				$this->data[$this->AuthnetTransaction->alias] = null;
+				$this->request->data[$this->AuthnetTransaction->alias] = null;
 			} else {
 				$this->__flashDecline();
 			}
