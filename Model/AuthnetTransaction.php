@@ -9,19 +9,18 @@
      *
      * @example
      $saved = $this->AuthnetTransaction->save(array(
-	     'amount' => 100,
-	     'cc_account' => '000000000000000',
-	     'cc_name' => 'john doe',
-	     'cc_expires' => '11/11',
+     	'amount' => 100,
+     	'cc_account' => '000000000000000',
+     	'cc_name' => 'john doe',
+     	'cc_expires' => '11/11',
      ));
-     $transaction_id = $this->AuthnetTransaction->id;
+     $transaction_id = $this->AuthnetTransaction->id
      debug($saved);
      debug($transaction_id);
      debug($this->AuthnetTransaction->log);
      */
     class AuthnetTransaction extends AuthnetAppModel {
         public $useDbConfig = 'authnet';
-        public $useTable = false;
         public $primaryKey = 'transaction_id';
         public $displayField = 'transaction_id';
         /**
@@ -58,7 +57,7 @@
                  'notExpired' => array(
                  'rule' => array('notExpired', 'expiration'),
                  'message' => 'Credit card is expired according to date
-                provided.',
+                 provided.',
                  'required' => false,
                  'allowEmpty' => true
                  )
@@ -170,246 +169,6 @@
             }
             $this->validationErrors[] = "unknown error";
             return false;
-        }
-
-        /**
-         *
-         * listSources is included in the base DataSources class 1.3 at the
-         * moment, and so the scaffold
-         * resets schema to null even if the child datasource class doesn't have
-         * the method implemented.
-         * Subsequently it resets _schema and attempts to run the models schema
-         * method - thus, this method.
-         */
-        public function schema() {
-            $this->_schema = array(
-                'server' => array(
-                    'type' => 'string',
-                    'length' => '16',
-                    'null' => false,
-                    'default' => NULL
-                ),
-                'amount' => array(
-                    'type' => 'float',
-                    'null' => false,
-                    'default' => 0
-                ),
-                'card_number' => array(
-                    'type' => 'string',
-                    'length' => '16',
-                    'null' => false,
-                    'default' => NULL
-                ),
-                'expiration' => array(
-                    'type' => 'string',
-                    'length' => 6,
-                    'null' => false,
-                    'default' => NULL
-                ),
-                'ccv' => array(
-                    'type' => 'string',
-                    'length' => 4,
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'recurring' => array(
-                    'type' => 'boolean',
-                    'null' => false,
-                    'default' => 0
-                ),
-
-                'transaction_id' => array(
-                    'type' => 'string',
-                    'length' => 255,
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'authorization_code' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'invoice_num' => array(
-                    'type' => 'string',
-                    'length' => 20,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'description' => array(
-                    'type' => 'string',
-                    'length' => 255,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'line_items' => array(
-                    'type' => 'text',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'billing_first_name' => array(
-                    'type' => 'string',
-                    'length' => 50,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_last_name' => array(
-                    'type' => 'string',
-                    'length' => 50,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_company' => array(
-                    'type' => 'string',
-                    'length' => 50,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_street' => array(
-                    'type' => 'string',
-                    'length' => 60,
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_city' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_state' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_zip' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_country' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_phone' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_fax' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'billing_email' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'customer_id' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'customer_ip' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'shipping_first_name' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_last_name' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_company' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_street' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_city' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_state' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_zip' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'shipping_country' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'taxes' => array(
-                    'type' => 'text',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'freight' => array(
-                    'type' => 'text',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'duty' => array(
-                    'type' => 'text',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'purchase_order_id' => array(
-                    'type' => 'string',
-                    'length' => 25,
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'authentication_indicator' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'default' => NULL
-                ),
-                'cardholder_authentication' => array(
-                    'type' => '',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'other' => array(
-                    'type' => 'text',
-                    'null' => true,
-                    'default' => NULL
-                ),
-
-                'test_mode' => array(
-                    'type' => 'boolean',
-                    'null' => true,
-                    'default' => NULL
-                )
-            );
-
-            return $this->_schema;
         }
 
     }
