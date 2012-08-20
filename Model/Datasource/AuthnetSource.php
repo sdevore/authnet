@@ -1,7 +1,6 @@
 <?php
 
-App::import('Core', 'HttpSocket');
-
+App::uses('HttpSocket', 'Network/Http');
 class AuthnetSource extends DataSource {
 
 	/**
