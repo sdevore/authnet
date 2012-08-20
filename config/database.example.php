@@ -3,7 +3,7 @@
 class DATABASE_CONFIG {
 
 	public $authnet = array(
-		'datasource' => 'authnet',
+	    'datasource' => 'Authnet.Authnet',
 		'server' => 'test',
 		'test_request' => false,
 		'login' => 'API_LOGIN_ID',
