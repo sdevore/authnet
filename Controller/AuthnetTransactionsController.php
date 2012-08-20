@@ -2,7 +2,7 @@
 
 class AuthnetTransactionsController extends AuthnetAppController {
 	
-	public function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			if ($result = $this->AuthnetTransaction->save($this->request->data)) {
 				$this->request->data = Set::merge($this->request->data, $result);
@@ -14,7 +14,7 @@ class AuthnetTransactionsController extends AuthnetAppController {
 		}
 	}
 	
-	public function update() {
+	public function admin_update() {
 		$this->add();
 	}
 	
